@@ -14,8 +14,12 @@ use std::env;
 
 fn main() {
     let args = env::args().collect::<Vec<_>>();
-    let bios = Bios::new(&Path::new(&args[0]));
+    let bios = Bios::new(&Path::new(&args[1]));
     let system = System::new(bios);
 
-    let cpu = Cpu::new(system);
+    let mut cpu = Cpu::new(system);
+
+    loop {
+        cpu.next_instruction()
+    }
 }

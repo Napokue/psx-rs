@@ -11,8 +11,8 @@ pub struct Bios {
 impl Bios {
     pub fn new(path: &Path) -> Self {
         let mut file = File::open(path).unwrap();
-        let mut data = Vec::new();
-        file.read(&mut data).unwrap();
+        let mut data = Vec::with_capacity(MEMORY_SIZE as usize);
+        file.read_to_end(&mut data).unwrap();
         Bios { data }
     }
 

@@ -15,4 +15,19 @@ impl Cpu {
             system,
         }
     }
+
+    pub fn next_instruction(&mut self) {
+        let pc = self.pc;
+        let instruction = self.load_32(pc);
+        self.pc = pc.wrapping_add(4);
+        self.decode_and_execute(instruction);
+    }
+
+    fn load_32(&self, address: u32) -> u32 {
+        self.system.load_32(address)
+    }
+
+    fn decode_and_execute(&mut self, instruction: u32) {
+
+    }
 }

@@ -12,7 +12,7 @@ impl System {
         }
     }
 
-    pub fn fetch_32(&self, address: u32) -> u32 {
+    pub fn load_32(&self, address: u32) -> u32 {
         if let Some(offset) = map::BIOS.contains(address) {
             self.bios.fetch_32(offset)
         } else {
