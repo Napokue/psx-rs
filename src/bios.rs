@@ -5,19 +5,15 @@ use std::io::Read;
 const MEMORY_SIZE: u32 = 512 * 1024;
 
 pub struct Bios {
-    data: [u8; MEMORY_SIZE as usize]
+    data: Vec<u8>
 }
 
 impl Bios {
     pub fn new(path: &Path) -> Self {
-        let mut bios = Bios {
-            data: [0; MEMORY_SIZE as usize]
-        };
-
         let mut file = File::open(path).unwrap();
-        file.read(&mut bios.data).unwrap();
-
-        bios
+        let mut data = Vec::new();
+        file.read(&mut data).unwrap();
+        Bios { data }
     }
 
     pub fn fetch_32(&self, offset: u32) -> u32 {
